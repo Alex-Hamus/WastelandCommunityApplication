@@ -1,0 +1,102 @@
+@model Watsteland.Models.vmPostList
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    @Html.ActionLink("Create","Create","Posts", new {ThreadId = Model.ThreadId, ForumId = Model.ForumId }, new { @class = "btn btn-primary btn-large" })
+</p>
+
+<div class="panel align-center">
+    @if(Model != null)
+    {
+        <h2>@Model.BaseForum.Title</h2>
+        <small>@Html.Raw(Model.BaseForum.Description)</small>
+        <h3>@Model.BaseThread.Title</h3>
+        <small>@Html.Raw(Model.BaseThread.Description)</small>
+
+    }
+</div>
+
+ <!-- START: Forums List -->
+<ul class="nk-forum nk-forum-topic">
+    @if (Model.posts.Count != 0)
+    {
+        foreach (var item in Model.posts)
+        {
+            <li>
+                <div class="nk-forum-topic-author">
+                    @*<img src="assets/images/avatar-1-sm.jpg" alt="Lesa Cruz">*@
+                    <div class="nk-forum-topic-author-name" title="Lesa Cruz">
+                        @if (Model.UserId == item.UserId || User.IsInRole("SystemAdmin"))
+                        {
+                            <br />
+                            @Html.ActionLink("Edit", "Edit", "Posts", new { PostId = item.PostId })
+                            <br />
+                            @Html.ActionLink("Delete", "DeletePost", "Posts", new { PostId = item.PostId })
+                            <br />
+
+                        }
+                        @item.UserName
+                    </div>
+                    @*<div class="nk-forum-topic-author-role">Keymaster</div>*@
+                    <div class="nk-forum-topic-author-since">
+                        @*Member since January 13, 2016*@
+                    </div>
+                </div>
+                <div class="nk-forum-topic-content">
+                    <p>@item.Title</p>
+                    <p>@Html.Raw(item.Description)</p>
+                    @*<div class="nk-forum-topic-attachments">
+                        <h4 class="h5">Attachments</h4>
+                        <a href="#">godlike-free.zip</a>
+                        <br> (14.86 MiB) Downloaded 185 times
+                    </div>*@
+                </div>
+                <div class="nk-forum-topic-footer">
+                    <span class="nk-forum-topic-date">@item.DateCreated</span>
+                    @*<span class="nk-forum-action-btn">
+                        <a href="#forum-reply" class="nk-anchor">
+                            <span class="fa fa-reply"></span> Reply
+                        </a>
+                    </span>
+                    <span class="nk-forum-action-btn">
+                        <a href="#">
+                            <span class="fa fa-flag"></span> Spam
+                        </a>
+                    </span>
+                    <span class="nk-forum-action-btn">
+                        <span class="nk-action-heart">
+                            <span class="num">18</span>
+                            <span class="like-icon ion-android-favorite-outline"></span>
+                            <span class="liked-icon ion-android-favorite"></span>
+                            Like
+                        </span>
+                    </span>*@
+                </div>
+            </li>
+
+        }
+
+    }
+    else
+    {
+        <p>No Posts</p>
+
+    }
+</ul>
+<!-- END: Forums List -->
+<br />
+<p>
+    @Html.ActionLink("Create", "Create", "Posts", new { ThreadId = Model.ThreadId, ForumId = Model.ForumId }, new { @class = "btn btn-primary btn-large" })
+</p>
+
+@Html.ActionLink("Back to Threads", "Index", "Threads", new { Id = Model.ForumId }, new { @class = "btn btn-primary btn-large" })
+
+<style>
+    .panel {
+        background: #2B2B2B;
+        color: white;
+    }
+</style>

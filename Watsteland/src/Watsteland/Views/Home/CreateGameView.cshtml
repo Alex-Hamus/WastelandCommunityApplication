@@ -1,0 +1,29 @@
+﻿@model Watsteland.Models.Game
+
+@{
+    ViewData["Title"] = "Create Game";
+}
+
+<div class="nk-info-box bg-danger">
+    @if (User.IsInRole("SystemAdmin"))
+    {
+        <h3>Create Game</h3>
+        <div>
+            <form asp-action="CreateGame">
+                <div class="form-group">
+                    <label asp-for="GameName" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="GameName" class="form-control" />
+                        <span asp-validation-for="GameName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <br />
+                        <input type="submit" value="Save Game" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+</div>

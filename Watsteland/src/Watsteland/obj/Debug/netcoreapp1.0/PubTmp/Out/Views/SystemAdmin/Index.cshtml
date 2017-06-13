@@ -1,0 +1,41 @@
+﻿@model List<Watsteland.Models.ApplicationUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+@Html.ActionLink("User Info","UserInformationList","SystemAdmin")
+<br />
+@Html.ActionLink("Add Community Update", "AddCommunityUpdateView","SystemAdmin")
+<br />
+@Html.ActionLink("Add Community Message", "CreateWellcomeMessageView", "SystemAdmin")
+<div class="panel">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Eamil</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Email</td>
+                        <td>@Html.ActionLink("UserRoles", "GetUserRoles", "SystemAdmin", new { UserId = item.Id })
+                        <br />
+                            @Html.ActionLink("Delete", "DeleteUser", "SystemAdmin", new {UserId = item.Id })
+                            
+                        
+                        </td>
+                    </tr>
+
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

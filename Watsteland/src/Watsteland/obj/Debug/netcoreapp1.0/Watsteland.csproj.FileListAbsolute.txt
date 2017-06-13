@@ -1,0 +1,12 @@
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\x64\libsass.dll
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\x86\libsass.dll
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\Watsteland.deps.json
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\Watsteland.runtimeconfig.json
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\Watsteland.runtimeconfig.dev.json
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\Watsteland.dll
+D:\ff\Watsteland\src\Watsteland\bin\Debug\netcoreapp1.0\Watsteland.pdb
+D:\ff\Watsteland\src\Watsteland\obj\Debug\netcoreapp1.0\Watsteland.csprojResolveAssemblyReference.cache
+D:\ff\Watsteland\src\Watsteland\obj\Debug\netcoreapp1.0\UserSecretsAssemblyInfo.cs
+D:\ff\Watsteland\src\Watsteland\obj\Debug\netcoreapp1.0\Watsteland.AssemblyInfo.cs
+D:\ff\Watsteland\src\Watsteland\obj\Debug\netcoreapp1.0\Watsteland.dll
+D:\ff\Watsteland\src\Watsteland\obj\Debug\netcoreapp1.0\Watsteland.pdb

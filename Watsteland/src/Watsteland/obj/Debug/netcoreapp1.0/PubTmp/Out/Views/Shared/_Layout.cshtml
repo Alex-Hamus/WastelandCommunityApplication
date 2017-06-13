@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Wasteland</title>
+
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92102849-1', 'auto');
+  ga('send', 'pageview');
+
+    </script>
+
+</head>
+<body>
+
+    @*<!-- START: Page Preloader -->
+    <div class="nk-preloader">
+        <!--
+             Preloader animation
+             data-close-... data used for closing preloader
+             data-open-...  data used for opening preloader
+        -->
+        <div class="nk-preloader-bg" style="background-color: #000;" data-close-frames="23" data-close-speed="1.2" data-close-sprites="./assets/images/preloader-bg.png" data-open-frames="23" data-open-speed="1.2" data-open-sprites="./assets/images/preloader-bg-bw.png">
+        </div>
+
+        <div class="nk-preloader-content">
+            <div>
+                <img class="nk-img" src="~/mp3/" alt="GodLike - Gaming Bootstrap 4 Template" width="170">
+                <div class="nk-preloader-animation"></div>
+            </div>
+        </div>
+
+        <div class="nk-preloader-skip">Skip</div>
+    </div>
+    <!-- END: Page Preloader -->*@
+    <!-- START: Page Background -->
+    @*<div class="nk-page-background op-5" data-bg-mp4="~/video/bg-2.mp4" data-bg-webm="~/video/bg-2.webm" data-bg-ogv="~/video/bg-2.ogv" data-bg-poster="~/video/bg-2.jpg"></div>*@
+    <!-- END: Page Background -->
+    @*<video id="bgVideo" autoplay poster="~/video/bg-2.jpg">
+        <source src="~/video/bg-2.mp4" type="video/mp4" />
+        <source src="~/video/bg-2.webm" type="video/webm" />
+        <source src="~/video/bg-2.ogv" type="video/ogg" />
+    </video>*@
+
+    @*<img id="bgImg" src="~/video/bg-2.jpg" />
+    <div id="bodyDummy">*@
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Hells Wasteland</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a asp-area="" asp-controller="Forum" asp-action="Index">Forums</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Rules">Community Rules</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Streams">Streams</a></li>
+                        @if (User.IsInRole("SystemAdmin"))
+                        {
+                            <li><a asp-area="" asp-controller="SystemAdmin" asp-action="Index">ManageWebstie</a></li>
+
+                        }
+                    </ul>
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p style="color: white">&copy; 2017 - Hells Watsteland</p>
+            </footer>
+        </div>
+
+        <environment names="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+            <script src="~/js/godlike.js"></script>
+            <script src="~/js/godlike-init.js"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+            </script>
+            <script src="~/js/godlike.js"></script>
+            <script src="~/js/godlike-init.js"></script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        @RenderSection("scripts", required: false)
+        @*</div>*@
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿@model Watsteland.Models.PrivateMessage
+
+@{
+    ViewData["Title"] = "Private Message";
+}
+
+@Html.ActionLink("Back to Inbox","Index","PrivateMessages")
+<div class="panel align-center">
+    <h2>Title: @Model.MessageTitle</h2>
+    <p>From: @Model.FromUserName</p>
+    @Html.Raw(Model.MessageDescription)
+</div>
+
+@Html.ActionLink("Reply", "Create", "PrivateMessages", new { UserId = Model.FromUserId })

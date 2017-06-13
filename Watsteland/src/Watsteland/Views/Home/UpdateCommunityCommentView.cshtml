@@ -1,0 +1,43 @@
+﻿@model Watsteland.Models.CommunityUpdateComment
+
+@{
+    ViewData["Title"] = "Update Comment";
+}
+
+
+<div class="nk-info-box bg-danger">
+    <h3>Update Comment</h3>
+    <div>
+        <form asp-action="UpdateCommunityComment">
+            <input type="hidden" asp-for="CommunityUpdateId" />
+            <input type="hidden" asp-for="CommentId" />
+            <div class="form-group">
+                <label asp-for="CommentTitle" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="CommentTitle" class="form-control" />
+                    <span asp-validation-for="CommentTitle" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <label asp-for="CommentDescription" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <textarea asp-for="CommentDescription"></textarea>
+                    <span asp-validation-for="CommentDescription" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <br />
+                    <input type="submit" value="Update Comment" class="btn btn-default" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>tinymce.init({ selector:'textarea' });</script>
+}

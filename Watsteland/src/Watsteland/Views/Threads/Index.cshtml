@@ -1,0 +1,85 @@
+@model Watsteland.Models.vmThreadList
+
+@{
+    ViewData["Title"] = "Index";
+}
+<p>
+    @Html.ActionLink("Create","Create","Threads", new { ForumId = Model.ForumId }, new { @class = "btn btn-primary btn-large" })
+</p>
+
+<div class="panel">
+    @if(Model != null)
+    {
+        <div class="align-center">
+            <h2>@Model.baseForum.Title</h2>
+            <small>@Html.Raw(Model.baseForum.Description)</small>
+        </div>
+
+    }
+</div>
+
+<!-- START: Forums List -->
+<ul class="nk-forum">
+    @if (Model.threads.Count != 0)
+    {
+        foreach (var item in Model.threads)
+        {
+            <li>
+                @if (item.Read == false)
+                {
+                    <img src="~/images/new.png" alt="New" height="42" width="42" />
+                }
+                <div class="nk-forum-icon">
+                    <span class="ion-pin"></span>
+                </div>
+                <div class="nk-forum-title">
+                    <h3>@Html.ActionLink(item.Title,"Index","Posts", new { ThreadId = item.ThreadId, ForumId = Model.ForumId })</h3>
+                    <h2>@Html.Raw(item.Description)</h2>
+                    <div class="nk-forum-title-sub">Started by <a href="#">@item.UserName</a> on @item.DateCreated</div>
+                </div>
+                <div class="nk-forum-count">
+                    @item.NumberOfPosts
+                </div>
+                @*<div class="nk-forum-activity-avatar">
+                    <img src="assets/images/avatar-1-sm.jpg" alt="Lesa Cruz">
+                </div>*@
+                <div class="nk-forum-activity">
+                    <div class="nk-forum-activity-title" title="Lesa Cruz">
+                        <a href="#">@item.UserName</a>
+                        @if(Model.UserId == item.UserId || User.IsInRole("SystemAdmin"))
+                        {
+                            <br />
+                            @Html.ActionLink("Edit", "Edit", "Threads", new { Id = item.ThreadId })
+                            <br />
+                            @Html.ActionLink("Delete", "DeleteThreadInfo", "Threads", new { Id = item.ThreadId })
+
+                        }
+                    </div>
+                    <div class="nk-forum-activity-date">
+                        
+                    </div>
+                </div>
+            </li>
+        }
+
+    }
+    else
+    {
+        <p>No Threads</p>
+
+    }
+</ul>
+<!-- END: Forums List -->
+<br />
+<p>
+    @Html.ActionLink("Create", "Create", "Threads", new { ForumId = Model.ForumId }, new { @class = "btn btn-primary btn-large" })
+</p>
+
+@Html.ActionLink("Back to Forums","Index","Forum", null, new { @class = "btn btn-info btn-large" })
+
+<style>
+    .panel {
+        background: #2B2B2B;
+        color: white;
+    }
+</style>

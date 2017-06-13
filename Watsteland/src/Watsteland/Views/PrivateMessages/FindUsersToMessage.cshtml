@@ -1,0 +1,39 @@
+﻿@model List<Watsteland.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Users List";
+}
+
+<div class="nk-info-box bg-danger">
+    <h3>Users To Message</h3>
+    <div class="panel">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>UserName</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@Html.ActionLink("Message", "Create", "PrivateMessages", new { UserId = item.Id })</td>
+                        </tr>
+
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .panel {
+        color: black;
+    }
+</style>

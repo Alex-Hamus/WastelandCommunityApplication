@@ -1,0 +1,86 @@
+@model Watsteland.Models.InboxList
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="panel">
+    <div class="align-center">
+        <h2>Messages</h2>
+    </div>
+
+    @Html.ActionLink("Message A User", "FindUsersToMessage","PrivateMessages")
+    <br />
+    @Html.ActionLink("Sent Messages", "SentBox", "PrivateMessages")
+            <table class="table">
+                <thead>
+                    <tr>
+                        @*<th>
+                            @Html.DisplayNameFor(model => item.FromUserId)
+                        </th>*@
+                        <th>
+                            From
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => item.MessageDescription)
+                        </th>*@
+                        @*<th>
+                            @Html.DisplayNameFor(model => item.ToUserId)
+                        </th>*@
+                        <th>
+                            To
+                        </th>
+                        <th>
+                            Read
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                     @if (Model != null)
+                  {
+                    foreach (var item in Model.messages)
+                  {
+                    <tr>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.FromUserId)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FromUserName)
+                        </td>
+                        <td>
+                            @Html.ActionLink(item.MessageTitle, "ReadMessage","PrivateMessages", new{ MessageId = item.MessageId })
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.MessageDescription)
+                        </td>*@
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.ToUserId)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ToUserName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Read)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "DeleteMessage","PrivateMessages", new { MessageId = item.MessageId})
+                        </td>
+                    </tr>
+                    
+                @*</tbody>
+            </table>*@
+
+        }
+
+    }
+    else
+    {
+        <p>No Messages</p>
+
+    }
+</tbody>
+</table>
+</div>

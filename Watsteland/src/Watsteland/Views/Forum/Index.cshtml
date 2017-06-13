@@ -1,0 +1,87 @@
+@model Watsteland.Models.vmForumList
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="panel">
+@if (User.IsInRole("SystemAdmin"))
+{
+    <p>
+        <a asp-action="Create" class="btn-primary">Create New</a>
+    </p>
+
+}
+
+
+<div class="container">
+        <h1 class="pull-left">Forums</h1>
+        <div class="clearfix"></div>
+    <p class="lead">This is the right place to discuss any ideas, critics, feature requests and all the ideas regarding our website and Servers. Please be respectful.</p>
+</div>
+</div>
+
+    <div class="container">
+        <ul class="nk-forum">
+            <!-- START: Forums List -->
+            @if (Model.forums.Count != 0)
+            {
+                foreach (var item in Model.forums)
+                {
+                    //if(item.ForumId == Model.Data)
+                    <li>
+                        @if(item.Read == false)
+                        {
+                            <img src="~/images/new.png" alt="New" height="42" width="42" />
+                        }
+                        <div class="nk-forum-icon">
+                            <span class="ion-ios-game-controller-b"></span>
+                        </div>
+                        @if (item.Title != null)
+                        {
+                            <div class="nk-forum-title">
+                                <h3><a href="forum-topics.html">@Html.ActionLink(item.Title, "Index", "Threads", routeValues: new { Id = item.ForumId }, htmlAttributes: null)</a></h3>
+                                <div class="nk-forum-title-sub">@Html.Raw(item.Description)</div>
+                            </div>
+
+                        }
+                        <div class="nk-forum-count">
+                            @item.NumberOfThreads
+                        </div>
+                        <div class="nk-forum-activity-avatar">
+                            <p>@item.UserName</p>
+                            @if (User.IsInRole("SystemAdmin"))
+                            {
+                                @Html.ActionLink("Remove", "DeleteForum", "Forum", new { Id = item.ForumId }) 
+                                <br />
+                                @Html.ActionLink("Edit", "Edit", "Forum", new { Id = item.ForumId })
+                            }
+                        </div>
+                        <div class="nk-forum-activity">
+                            @*<div class="nk-forum-activity-title" title="GodLike the only game that I want to play!">
+                                <a href="forum-single-topic.html">GodLike the only game that I want to play!</a>
+                            </div>*@
+                        <div class="nk-forum-activity-date">
+                            @item.DateCreated
+                        </div>
+                    </div>
+                </li>
+
+            }
+
+        }
+        else
+        {
+            <p>No Forums</p>
+
+        }
+    </ul>
+    <!-- END: Forums List -->
+</div>
+
+<style>
+    .panel {
+        background: #2B2B2B;
+        color: white;
+    }
+</style>

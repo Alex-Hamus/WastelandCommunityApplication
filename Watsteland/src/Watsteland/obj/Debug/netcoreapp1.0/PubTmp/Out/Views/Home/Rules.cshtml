@@ -1,0 +1,65 @@
+﻿@model List<Watsteland.Models.vmGameRules>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="align-center">
+    <img src="~/images/hellsbanner.png" alt="Smiley face" height="100" width="600">
+</div>
+
+<div class="panel">
+    <div class="align-center">
+        <h3>Server Rules</h3>
+    </div>
+
+    @if (User.IsInRole("SystemAdmin")||(User.IsInRole("Moderator")))
+    {
+
+        @Html.ActionLink("Create BaseRule", "CreateGameView", "Home")
+    }
+
+    @if (Model != null)
+    {
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li><h3>@item.Game.GameName</h3></li>
+
+                @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                {
+                    @Html.ActionLink("Add Rule", "CreateRuleView", "Home", new {GameId = item.Game.GameId })
+                    <br />
+                    @Html.ActionLink("Delete", "DeleteGame", "Home", new { GameId = item.Game.GameId })
+
+                }
+
+                @if(item.Rules != null)
+                {
+                    <ul>
+                        @foreach(var ritem in item.Rules)
+                        {
+                            <li>@ritem.RuleDescription</li>
+                            @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                            {
+                                @Html.ActionLink("Update Rule", "UpdateRuleView", "Home", new { RuleId = ritem.RulesId })
+                                <br />
+                                @Html.ActionLink("Delete Rule", "DeleteRule", "Home", new { RuleId = ritem.RulesId })
+
+                            }
+
+                        }
+                    </ul>
+                }
+
+            }
+        </ul>
+
+    }
+    </div>
+
+<style>
+    .panel {
+        background: #2B2B2B;
+        color: white;
+    }
+</style>

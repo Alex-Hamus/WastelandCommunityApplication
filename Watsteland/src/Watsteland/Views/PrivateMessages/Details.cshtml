@@ -1,0 +1,60 @@
+@model Watsteland.Models.PrivateMessage
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PrivateMessage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FromUserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FromUserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FromUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FromUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MessageDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MessageTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MessageTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ToUserId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ToUserId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ToUserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ToUserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Unread)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Unread)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MessageId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

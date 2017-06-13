@@ -1,0 +1,233 @@
+﻿@model Watsteland.Models.vmIndex
+@{
+    ViewData["Title"] = "Home Page";
+}
+                @*<div class="col-md-8">
+                                    <a class="embedly-card" href="https://www.twitch.tv/gaminaustin">gaminaustin - Twitch</a>
+                                    <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
+                    </div>*@
+<div class="align-center">
+    <img src="~/images/hellsbanner.png" alt="Smiley face" height="100" width="600">
+</div>
+
+<br />
+    <div class="row no-gutters">
+        <div class="col-12 col-sm-6 col-md-8">
+            @if (Model.WellcomeMessages.Count != 0)
+            {
+                foreach (var item in Model.WellcomeMessages)
+                {
+                    @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                    {
+                        @Html.ActionLink("Update Wellcome Message", "UpdateCommunityMessageView", "Home", new { CommunityMessageId = item.WellcomeMessageId })
+                        <br />
+                        @Html.ActionLink("Delete", "DeleteCommunityMessage", "Home", new { WellcomeMessageId = item.WellcomeMessageId })
+                    }
+
+                    <div class="panel">
+                        <div class="panel-body">
+                            <h2 class="align-center">@item.WellcomeTitle</h2>
+                            @Html.Raw(item.MessageDescription)
+                        </div>
+                    </div>
+                }
+
+            }
+            <div class="panel">
+                @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                {
+                    @Html.ActionLink("Add Community Update", "AddCommunityUpdateView", "Home")
+                }
+                <div class="panel-heading">
+                    <h2 class="text-center">Community Updates</h2>
+                </div>
+            </div>
+                @if (Model != null)
+            {
+                    @*<ul>*@
+
+                        @foreach (var item in Model.CommmunityUpdates)
+                {
+                            <div class="panel">
+                                @*<li>*@
+                                    @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                                    {
+                                        @Html.ActionLink("Delete", "DeleteCommunityUpdate", "Home", new { CommunityUpdateId = item.CommunityUpdateId })
+                                        <br />
+                                        @Html.ActionLink("Edit", "EditCommunityUpdateView", "Home", new { CommunityUpdateId = item.CommunityUpdateId })
+                                        <br />
+                                    }
+                                    @*<h3>@item.UpdateTitle</h3>*@
+                                    <h3 class="align-center">@Html.ActionLink(item.UpdateTitle, "ViewCommunityUpdateComments", "Home", new { CommunityUpdateId = item.CommunityUpdateId })</h3>
+                                    <p class="align-center"><small>by: @item.UserName&nbsp;&nbsp;&nbsp;&nbsp;</small><small>Created: @item.CreatedDate&nbsp;&nbsp;&nbsp;&nbsp; Comments: @item.NumberOfComments</small></p>
+                                <div style="margin:auto; width:80%; overflow-wrap: break-word;">
+                                    <p>@Html.Raw(item.UdateInformation)</p>
+                                    </div>
+                                    @*</li>*@
+                                </div>
+                            @*<hr width="50%" />*@
+                        }
+                    @*</ul>*@
+                }
+            
+            <div class="panel">
+                @if (Model.Stats != null)
+            {
+                    <h3 class="align-center">Statistics</h3>
+                    <ul>
+                        <li>Community Members: @Model.Stats.NumberOfCommunityMembers</li>
+                        <li>Forums: @Model.Stats.NumberOfForums</li>
+                        <li>Threads: @Model.Stats.NumberOfThreads</li>
+                        <li>Posts: @Model.Stats.NumberOfPosts</li>
+                        <li>Polls: @Model.Stats.NumberOfPolls</li>
+                    </ul>
+
+                }
+                <br />
+                @if (Model.Updates != null)
+                {
+                    <div class="mygrid-wrapper-div">
+                        <br />
+                        <ul>
+                            @foreach (var item in Model.Updates)
+                            {
+
+                                <li>@item.UserName: @item.UpdateInformation. At: @item.CreatedDate</li>
+
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="align-center">
+            <h4 class="nk-btn-color-white">Want to help out the server?</h4>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+            <h5 class="nk-btn-color-white">All donations will be used to insure the server stays up and operational.</h5>
+        </div>
+        <div class="col-6 col-md-4">
+            <iframe src="https://discordapp.com/widget?id=175428936224866305&theme=dark" width="345" height="600" allowtransparency="true" frameborder="0"></iframe>
+            <br />
+            
+            <div>
+                <div><h2 style="color:red">Ark Server 1</h2></div>
+                <script type="application/javascript">window.addEventListener('message',function(e){if(e.data.uid&&e.data.type==='sizeUpdate'){var i = document.querySelector('iframe[name="'+e.data.uid+'"]');i.style.width = e.data.payload.width;i.style.height = e.data.payload.height;}});</script><iframe src="https://cdn.battlemetrics.com/b/rkG8KRnql/841021.html?foreground=%23EEEEEE&linkColor=%231185ec&lines=%23333333&background=%23222222&chart=players%3A24H&chartColor=%23FF0700&maxPlayersHeight=300" frameborder=0 style="border:0" name="gtvkt"></iframe>
+                <div><h2 style="color:red">Ark Server 2</h2></div>
+                <script type="application/javascript">window.addEventListener('message',function(e){if(e.data.uid&&e.data.type==='sizeUpdate'){var i = document.querySelector('iframe[name="'+e.data.uid+'"]');i.style.width = e.data.payload.width;i.style.height = e.data.payload.height;}});</script><iframe src="https://cdn.battlemetrics.com/b/BJzcgIvg-/1074923.html?foreground=%23EEEEEE&linkColor=%231185ec&lines=%23333333&background=%23222222&chart=players%3A24H&chartColor=%23FF0700&maxPlayersHeight=300" frameborder=0 style="border:0" name="dyrvq"></iframe>
+                <div><h2 style="color:red">Conan</h2></div>
+                <script type="application/javascript">window.addEventListener('message',function(e){if(e.data.uid&&e.data.type==='sizeUpdate'){var i = document.querySelector('iframe[name="'+e.data.uid+'"]');i.style.width = e.data.payload.width;i.style.height = e.data.payload.height;}});</script><iframe src="https://cdn.battlemetrics.com/b/r1ooAif1b/1030918.html?foreground=%23EEEEEE&linkColor=%231185ec&lines=%23333333&background=%23222222&chart=players%3A24H&chartColor=%23FF0700&maxPlayersHeight=300" frameborder=0 style="border:0" name="heawv"></iframe>
+            </div>
+            <div>
+                @if (User.IsInRole("SystemAdmin"))
+            {
+                    @Html.ActionLink("Create Poll", "CreatePollView", "Home")
+                    <br />
+
+                }
+                @if (Model.Polls.Count != 0)
+            {
+                foreach (var item in Model.Polls)
+                {
+                        @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                        {
+                            <h4>@item.Poll.Question</h4>
+                            @Html.ActionLink("Update Poll", "EditPollView", "Home", new { PollId = item.Poll.PollId })
+                            <br />
+                            @Html.ActionLink("Deactivate", "DeactivatePoll", "Home", new { PollId = item.Poll.PollId })
+                            <br />
+                            @Html.ActionLink("Create Poll Option", "CreatePollOptionView", "Home", new { PollId = item.Poll.PollId })
+
+                        }
+
+                        @if (item.PollOptions != null && Model.UserId != null)
+                        {
+                            <div class="nk-info-box bg-info">
+                                <h4>@item.Poll.Question</h4>
+                                @foreach (var option in item.PollOptions)
+                                {
+                                    @if (User.IsInRole("SystemAdmin") || (User.IsInRole("Moderator")))
+                                    {
+                                        @Html.ActionLink("Update Poll Option", "EditPollOptionView", "Home", new { PollOptionId = option.PollOptionsId })
+                                        <br />
+                                        @Html.ActionLink("Delete", "DeletePollOption", "Home", new { PollOptionId = option.PollOptionsId })
+                                        <br />
+
+                                    }
+                                    @if (Model.PollData != null && item.AreadyVoted != true)
+                                    {
+                                        <div class="pull-left">
+                                            @Html.ActionLink(option.OptionDescription, "Vote", "Home", new { PollOptionId = option.PollOptionsId }, new { @class = "btn btn-info btn-large" })
+                                        </div>
+                                        <br />
+                                        <br />
+                                    }
+                                    else if (Model.PollData != null)
+                                    {
+
+                                        <p>@option.OptionDescription: &nbsp;&nbsp;&nbsp;&nbsp; @option.Votes</p>
+
+
+                                    }
+                                }
+
+                            </div>
+                        }
+
+                    }
+
+                }
+                else if(Model.UserId != null)
+                {
+                    <div class="nk-info-box bg-danger align-center">
+                        No Current Polls
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+<style>
+    .panel {
+background: #2B2B2B;
+color: white;
+    }
+
+    .mygrid-wrapper-div {
+    /*border: solid red 5px;*/
+    overflow: scroll;
+    height: 300px;
+    background-color: rgb(34,34,34);
+    color: white;
+    } 
+
+  .container [class^="col"] {
+  padding-left: 25px;
+  padding-right: 25px;
+
+  /*background: red;*/
+}
+
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 30px;
+        height: 0;
+        overflow: hidden;
+    }
+
+        .video-container iframe, .video-container object, .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+</style>

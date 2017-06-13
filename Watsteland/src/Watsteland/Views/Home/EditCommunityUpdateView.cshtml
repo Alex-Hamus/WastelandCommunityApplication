@@ -1,0 +1,71 @@
+﻿@model Watsteland.Models.CommunityUpdates
+
+
+@{
+    ViewData["Title"] = "Update Community Update";
+}
+
+
+<div class="panel panel-danger">
+    <form asp-action="UpdateCommunityInfo">
+        <div class="form-horizontal">
+            <h4>CommunityUpdates</h4>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CommunityUpdateId" />
+            <div class="form-group">
+                <label asp-for="UpdateTitle" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="UpdateTitle" class=" " />
+                    <span asp-validation-for="UpdateTitle" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="UdateInformation" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <textarea asp-for="UdateInformation"></textarea>
+                    <span asp-validation-for="UdateInformation" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+<script>
+
+        tinymce.init({
+            selector: 'textarea',
+            height: 500,
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc help'
+            ],
+            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help',
+            image_advtab: true,
+            templates: [
+                { title: 'Test template 1', content: 'Test 1' },
+                { title: 'Test template 2', content: 'Test 2' }
+            ],
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css'
+            ]
+        });
+
+</script>
+}

@@ -1,0 +1,79 @@
+@model Watsteland.Models.PrivateMessage
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form asp-action="Edit">
+    <div class="form-horizontal">
+        <h4>PrivateMessage</h4>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="MessageId" />
+        <div class="form-group">
+            <label asp-for="FromUserId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FromUserId" class="form-control" />
+                <span asp-validation-for="FromUserId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="FromUserName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="FromUserName" class="form-control" />
+                <span asp-validation-for="FromUserName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MessageDescription" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MessageDescription" class="form-control" />
+                <span asp-validation-for="MessageDescription" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="MessageTitle" required class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="MessageTitle" class="form-control" />
+                <span asp-validation-for="MessageTitle" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ToUserId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ToUserId" class="form-control" />
+                <span asp-validation-for="ToUserId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ToUserName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ToUserName" class="form-control" />
+                <span asp-validation-for="ToUserName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <div class="checkbox">
+                    <input asp-for="Unread" />
+                    <label asp-for="Unread"></label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

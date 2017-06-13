@@ -1,0 +1,26 @@
+﻿@model List<Watsteland.Models.UserInformation>
+
+<div class="panel">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>UserName</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.Password</td>
+                    </tr>
+
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

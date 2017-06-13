@@ -1,0 +1,29 @@
+﻿@model Watsteland.Models.PollOption
+@{
+    ViewData["Title"] = "Create Poll";
+}
+
+<div class="panel">
+    <h2>Create</h2>
+
+    <form asp-action="CreatePollOptionsInfo">
+        <div class="form-horizontal">
+            <h4>Poll Option</h4>
+            <hr />
+            <input type="hidden" asp-for="PollId" />
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="OptionDescription" class="col-md-2 control-label"></label>
+                <div class="col-md-10">
+                    <input asp-for="OptionDescription" class="form-control" />
+                    <span asp-validation-for="OptionDescription" class="text-danger" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

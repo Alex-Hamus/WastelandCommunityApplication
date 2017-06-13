@@ -1,0 +1,79 @@
+﻿@model Watsteland.Models.vmCommunityUpdateComment
+
+@{
+    ViewData["Title"] = "Comments";
+}
+
+@if (User.IsInRole("NormalUser"))
+{
+
+    @Html.ActionLink("Add Comment", "CreateCommunityUpdateView", "Home", new { CommunityUpdateId = Model.CommunityUpdate.CommunityUpdateId })
+}
+
+@if (Model != null)
+{
+    <div class="nk-info-box bg-danger">
+        <div class="align-center">
+            <h3>@Model.CommunityUpdate.UpdateTitle</h3>
+            <br />
+            <p>@Html.Raw(Model.CommunityUpdate.UdateInformation)</p>
+        </div>
+    </div>
+        <!-- START: Forums List -->
+        <ul class="nk-forum nk-forum-topic">
+            @if (Model.Comments.Count != 0)
+            {
+                foreach (var item in Model.Comments)
+                {
+                    <li>
+                        <div class="nk-forum-topic-author">
+                            @*<img src="assets/images/avatar-1-sm.jpg" alt="Lesa Cruz">*@
+                            <div class="nk-forum-topic-author-name" title="Lesa Cruz">
+                                @if (Model.UserId == item.UserId || User.IsInRole("SystemAdmin"))
+                        {
+                                    <br />
+                                    @Html.ActionLink("Update", "UpdateCommunityCommentView", "Home", new { CommentId = item.CommentId })
+                                    <br />
+                                    @Html.ActionLink("Delete", "DeleteCommunityComment", "Home", new { CommentId = item.CommentId })
+                                    <br />
+
+                                }
+                                @item.UserName
+                            </div>
+                            @*<div class="nk-forum-topic-author-role">Keymaster</div>*@
+                            <div class="nk-forum-topic-author-since">
+                                @*Member since January 13, 2016*@
+                            </div>
+                        </div>
+                        <div class="nk-forum-topic-content">
+                            <p>@item.CommentTitle</p>
+                            <p>@Html.Raw(item.CommentDescription)</p>
+                            @*<div class="nk-forum-topic-attachments">
+                                <h4 class="h5">Attachments</h4>
+                                <a href="#">godlike-free.zip</a>
+                                <br> (14.86 MiB) Downloaded 185 times
+                            </div>*@
+                        </div>
+                        <div class="nk-forum-topic-footer">
+                            <span class="nk-forum-topic-date">@item.CreatedDate</span>
+                        </div>
+                    </li>
+
+                }
+
+            }
+            else
+            {
+                <p>No Comments</p>
+
+            }
+        </ul>
+
+}
+
+@if (User.IsInRole("NormalUser"))
+{
+    @Html.ActionLink("Add Comment", "CreateCommunityUpdateView", "Home", new { CommunityUpdateId = Model.CommunityUpdate.CommunityUpdateId })
+    <br />
+}
+@Html.ActionLink("Back","Index","Home")

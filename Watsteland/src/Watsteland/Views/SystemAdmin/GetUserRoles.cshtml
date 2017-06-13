@@ -1,0 +1,53 @@
+﻿@model Watsteland.Models.vmUser
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<div class="panel">
+    <p>@Model.UserId</p>
+    @if (Model != null)
+    {
+        <h2>@Model.UserName @Model.UserPassowrd</h2>
+
+        if (Model.vmUserRoles != null)
+        {
+            <ul>
+                @foreach (var item in Model.vmUserRoles)
+                {
+                    <li>@item.RoleName</li>
+                    @Html.ActionLink("Remove Role", "RemoveRole","SystemAdmin", new { UserId = Model.UserId, Role = item.RoleName })
+
+                }
+            </ul>
+
+        }
+
+    }
+
+</div>
+
+<div class="nk-info-box bg-danger">
+    <h3>Add role to user</h3>
+    <form asp-action="SaveUserRoles">
+        @Html.HiddenFor(m => m.UserId)
+        @Html.HiddenFor(m => m.UserName)
+        @Html.HiddenFor(m => m.UserPassowrd)
+        @Html.HiddenFor(m => m.UserRoles)
+        @Html.HiddenFor(m => m.vmUserRoles)
+        <label asp-for="RoleName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="RoleName" class="form-control" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <br />
+                <input type="submit" value="Save User Roles" class="btn btn-default" />
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
